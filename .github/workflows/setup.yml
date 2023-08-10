@@ -26,8 +26,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-         go: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, ubuntu-latest, ubuntu-18.04]
-         flag: [A, B]
+         go: [ubuntu-20.04, ubuntu-22.04]
+         flag: [A]
     runs-on: ${{ matrix.go }}
     timeout-minutes: 360
     steps:
@@ -42,8 +42,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-         go: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, ubuntu-latest, ubuntu-18.04]
-         flag: [A, B]
+         go: [ubuntu-20.04, ubuntu-22.04, ubuntu-latest]
+         flag: [B]
     runs-on: ${{ matrix.go }}
     timeout-minutes: 360
     steps:
